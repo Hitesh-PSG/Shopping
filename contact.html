@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Contact us Page Design</title>
+<link rel="stylesheet" type="text/css" href="contact.css">
+</head>
+<body>
+	<section class="header">
+		<nav>
+			<a href="com.html"><img src="images/logo.png" /></a>
+			<div class="nav-links">
+		<div class="nav-links">
+			<ul>
+			  <li>
+				<div class="search-container">
+				  <input type="text" class="search-box" placeholder="Search..." />
+				  <button class="search-btn" onclick="toggleSearch()">
+					&#128269;
+				  </button>
+				</div>
+				<script>
+				  function toggleSearch() {
+					var searchBox = document.querySelector(".search-box");
+					searchBox.classList.toggle("active");
+				  }
+				</script>
+			  </li>
+			  <li><a href="index.html">Home</a></li>
+			  <li><a href="item.html">Products</a></li>
+			  
+			  <li><a href="blog.html">Blog</a></li>
+			  <li><a href="contact.html">Contact</a></li>
+			 
+			</ul>
+		  </div>
+		</nav>
+	<section class="contact">
+		<div class="content">
+			<h2>Contact Us</h2>
+			<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem numquam id reprehenderit, sunt laudantium enim possimus repellat debitis et quis!</p>
+		</div>
+	<!-- </section> -->
+		<div class="container">
+			<div class="contactInfo">
+				<div class="box">
+					<div class="icon"><ion-icon name="location-outline"></ion-icon></div>
+					<div class="text">
+						<h3>Address</h3>
+						<p>#123,defence colony<br>Indiranagar,Banglore<br>560053</p>
+					</div>
+				</div>
+				<div class="box">
+					<div class="icon"><ion-icon name="call-outline"></ion-icon></div>
+					<div class="text">
+						<h3>Phone</h3>
+						<p>9009854664</p>
+					</div>
+				</div>
+				<div class="box">
+					<div class="icon"><ion-icon name="mail-outline"></ion-icon></div>
+					<div class="text">
+						<h3>Email</h3>
+						<p>Shoppingstore@gmail.com</p>
+					</div>
+				</div>
+				<h2 class="txt">Connect with us</h2>
+				<ul class="sci">
+					<li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a></li>
+					<li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a></li>
+					<li><a href="https://www.linkedin.com/in/hitesh-p-aa55662a3" target="_blank"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+					<li><a href="https://github.com/Hitesh-PSG" target="_blank"><ion-icon name="logo-github"></ion-icon></a></li>
+				</ul>
+			</div>
+
+			<div class="contactForm">
+				<form name="submit-to-google-sheet">
+					<input type="hidden" name="ip_address" id="ip_address">
+                    <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+                <input type="hidden" name="address" id="address">
+					<h2>Send Message</h2>
+					<div class="inputBox">
+						<input type="text" name="name" required="required">
+						<span>Full Name</span>
+					</div>
+					<div class="inputBox">
+						<input type="text" name="email" required="required">
+						<span>Email</span>
+					</div>
+					<div class="inputBox">
+						<textarea name="message" required="required"></textarea>
+						<span>Type your Message...</span>
+					</div>
+					<div class="inputBox">
+						<input type="submit" value="Send">
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+	<!-- <script>
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbzs0ZGkxPHleLsAlOlPhW6s16D6RfUSu8qsPvep2m2Ghv2D2BkD_XTrJfD_flNSWnfUQw/exec'
+		const form = document.forms['submit-to-google-sheet']
+	  
+		form.addEventListener('submit', e => {
+		  e.preventDefault()
+		  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+			.then(response => console.log('Success!', response))
+			.catch(error => console.error('Error!', error.message))
+		})
+	  </script>
+	<script>
+		const form = document.forms['submit-to-google-sheet'];
+		const sendButton = form.querySelector('input[type="submit"]');
+	
+		sendButton.addEventListener('click', (e) => {
+			e.preventDefault(); // Prevent form submission
+			form.reset(); // Reset form fields
+			document.querySelectorAll('.inputBox').forEach(box => {
+				box.style.display = 'none'; // Hide all input boxes
+			});
+		});
+	</script> -->
+	<script>
+		const scriptURL = 'https://script.google.com/macros/s/AKfycbzs0ZGkxPHleLsAlOlPhW6s16D6RfUSu8qsPvep2m2Ghv2D2BkD_XTrJfD_flNSWnfUQw/exec';
+		const form = document.forms['submit-to-google-sheet'];
+		const ipAddressField = document.getElementById('ip_address');
+		const latitudeField = document.getElementById('latitude');
+		const longitudeField = document.getElementById('longitude');
+		const addressField = document.getElementById('address');
+	
+		form.addEventListener('submit', e => {
+			e.preventDefault();
+	
+			fetch('https://api64.ipify.org?format=json')
+				.then(response => response.json())
+				.then(data => {
+					ipAddressField.value = data.ip;
+	
+					navigator.geolocation.getCurrentPosition(
+						position => {
+							latitudeField.value = position.coords.latitude;
+							longitudeField.value = position.coords.longitude;
+	
+							fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`)
+								.then(response => response.json())
+								.then(data => {
+									addressField.value = data.display_name;
+	
+									// Submit the form
+									fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+										.then(response => console.log('Success!', response))
+										.catch(error => console.error('Error submitting form:', error.message));
+								})
+								.catch(error => console.error('Error fetching address:', error.message));
+						},
+						error => {
+							console.error('Error getting geolocation:', error.message);
+							// Submit the form without geolocation
+							fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+								.then(response => console.log('Success!', response))
+								.catch(error => console.error('Error submitting form:', error.message));
+						}
+					);
+				})
+				.catch(error => console.error('Error getting IP address:', error.message));
+		});
+	</script>
+	<script></script>
+	
+</body>
+
+</html>
