@@ -101,7 +101,7 @@
 	</section>
 	<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-	<!-- <script>
+	 <script>
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbzs0ZGkxPHleLsAlOlPhW6s16D6RfUSu8qsPvep2m2Ghv2D2BkD_XTrJfD_flNSWnfUQw/exec'
 		const form = document.forms['submit-to-google-sheet']
 	  
@@ -112,7 +112,7 @@
 			.catch(error => console.error('Error!', error.message))
 		})
 	  </script>
-	<script>
+<!-- 	<script>
 		const form = document.forms['submit-to-google-sheet'];
 		const sendButton = form.querySelector('input[type="submit"]');
 	
@@ -124,50 +124,7 @@
 			});
 		});
 	</script> -->
-	<script>
-		const scriptURL = 'https://script.google.com/macros/s/AKfycbzs0ZGkxPHleLsAlOlPhW6s16D6RfUSu8qsPvep2m2Ghv2D2BkD_XTrJfD_flNSWnfUQw/exec';
-		const form = document.forms['submit-to-google-sheet'];
-		const ipAddressField = document.getElementById('ip_address');
-		
-		const addressField = document.getElementById('address');
-	
-		form.addEventListener('submit', e => {
-			e.preventDefault();
-	
-			fetch('https://api64.ipify.org?format=json')
-				.then(response => response.json())
-				.then(data => {
-					ipAddressField.value = data.ip;
-	
-					navigator.geolocation.getCurrentPosition(
-						position => {
-							latitudeField.value = position.coords.latitude;
-							longitudeField.value = position.coords.longitude;
-	
-							fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}&zoom=18&addressdetails=1`)
-								.then(response => response.json())
-								.then(data => {
-									addressField.value = data.display_name;
-	
-									// Submit the form
-									fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-										.then(response => console.log('Success!', response))
-										.catch(error => console.error('Error submitting form:', error.message));
-								})
-								.catch(error => console.error('Error fetching address:', error.message));
-						},
-						error => {
-							console.error('Error getting geolocation:', error.message);
-							// Submit the form without geolocation
-							fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-								.then(response => console.log('Success!', response))
-								.catch(error => console.error('Error submitting form:', error.message));
-						}
-					);
-				})
-				.catch(error => console.error('Error getting IP address:', error.message));
-		});
-	</script>
+	 
 	<script></script>
 	
 </body>
