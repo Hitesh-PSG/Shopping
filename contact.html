@@ -77,8 +77,7 @@
 			<div class="contactForm">
 				<form name="submit-to-google-sheet">
 					<input type="hidden" name="ip_address" id="ip_address">
-                    <input type="hidden" name="latitude" id="latitude">
-                <input type="hidden" name="longitude" id="longitude">
+                    
                 <input type="hidden" name="address" id="address">
 					<h2>Send Message</h2>
 					<div class="inputBox">
@@ -129,8 +128,7 @@
 		const scriptURL = 'https://script.google.com/macros/s/AKfycbzs0ZGkxPHleLsAlOlPhW6s16D6RfUSu8qsPvep2m2Ghv2D2BkD_XTrJfD_flNSWnfUQw/exec';
 		const form = document.forms['submit-to-google-sheet'];
 		const ipAddressField = document.getElementById('ip_address');
-		const latitudeField = document.getElementById('latitude');
-		const longitudeField = document.getElementById('longitude');
+		
 		const addressField = document.getElementById('address');
 	
 		form.addEventListener('submit', e => {
